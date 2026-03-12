@@ -11,10 +11,16 @@ public class CarSelectionHandler {
                 System.out.println("  " + category.getCode() + ". " + category.getDisplayName());
             }
             System.out.print("Your choice: ");
-            int choice = sc.nextInt();
-            selectedCategory = Enums.CarCategory.fromCode(choice);
-            if (selectedCategory == null) {
-                System.out.println("Invalid choice. Please try again.");
+
+            if (sc.hasNextInt()) {
+                int choice = sc.nextInt();
+                selectedCategory = Enums.CarCategory.fromCode(choice);
+                if (selectedCategory == null) {
+                    System.out.println("Invalid choice. Please try again.");
+                }
+            } else {
+                String invalid = sc.next();
+                System.out.println("Invalid input. Please enter a number.");
             }
         }
 
@@ -28,11 +34,17 @@ public class CarSelectionHandler {
                 }
             }
             System.out.print("Your choice: ");
-            int choice = sc.nextInt();
-            selectedModel = Enums.CarModel.fromCode(choice);
-            if (selectedModel == null || selectedModel.getCategory() != selectedCategory) {
-                System.out.println("Invalid choice for " + selectedCategory.getDisplayName() + " category. Please try again.");
-                selectedModel = null;
+
+            if (sc.hasNextInt()) {
+                int choice = sc.nextInt();
+                selectedModel = Enums.CarModel.fromCode(choice);
+                if (selectedModel == null || selectedModel.getCategory() != selectedCategory) {
+                    System.out.println("Invalid choice for " + selectedCategory.getDisplayName() + " category. Please try again.");
+                    selectedModel = null;
+                }
+            } else {
+                String invalid = sc.next();
+                System.out.println("Invalid input. Please enter a number.");
             }
         }
 
@@ -44,10 +56,16 @@ public class CarSelectionHandler {
                 System.out.println("  " + type.getCode() + ". " + type.getDisplayName());
             }
             System.out.print("Your choice: ");
-            int choice = sc.nextInt();
-            engineType = Enums.EngineType.fromCode(choice);
-            if (engineType == null) {
-                System.out.println("Invalid choice. Please try again.");
+
+            if (sc.hasNextInt()) {
+                int choice = sc.nextInt();
+                engineType = Enums.EngineType.fromCode(choice);
+                if (engineType == null) {
+                    System.out.println("Invalid choice. Please try again.");
+                }
+            } else {
+                String invalid = sc.next();
+                System.out.println("Invalid input. Please enter a number.");
             }
         }
         Engine engine = EngineFactory.createEngine(engineType);
@@ -60,10 +78,16 @@ public class CarSelectionHandler {
                 System.out.println("  " + type.getCode() + ". " + type.getDisplayName());
             }
             System.out.print("Your choice: ");
-            int choice = sc.nextInt();
-            turboType = Enums.TurboType.fromCode(choice);
-            if (turboType == null) {
-                System.out.println("Invalid choice. Please try again.");
+
+            if (sc.hasNextInt()) {
+                int choice = sc.nextInt();
+                turboType = Enums.TurboType.fromCode(choice);
+                if (turboType == null) {
+                    System.out.println("Invalid choice. Please try again.");
+                }
+            } else {
+                String invalid = sc.next();
+                System.out.println("Invalid input. Please enter a number.");
             }
         }
         Turbocharger turbo = TurboFactory.createTurbo(turboType);

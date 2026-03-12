@@ -10,10 +10,16 @@ public class NOSSelectionHandler {
                 System.out.println("  " + option.getCode() + ". " + option.getDisplayName());
             }
             System.out.print("Your choice: ");
-            int choice = sc.nextInt();
-            nosOption = Enums.NOSOption.fromCode(choice);
-            if (nosOption == null) {
-                System.out.println("Invalid choice. Please try again.");
+
+            if (sc.hasNextInt()) {
+                int choice = sc.nextInt();
+                nosOption = Enums.NOSOption.fromCode(choice);
+                if (nosOption == null) {
+                    System.out.println("Invalid choice. Please try again.");
+                }
+            } else {
+                String invalid = sc.next();
+                System.out.println("Invalid input. Please enter a number.");
             }
         }
         return NOSFactory.createNOS(nosOption, car);

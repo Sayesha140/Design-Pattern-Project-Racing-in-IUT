@@ -11,10 +11,17 @@ public class TrackSelectionHandler {
                         " (" + type.getLocation() + ")");
             }
             System.out.print("Your choice: ");
-            int choice = sc.nextInt();
-            trackType = Enums.TrackType.fromCode(choice);
-            if (trackType == null) {
-                System.out.println("Invalid choice. Please try again.");
+
+            // Check if input is an integer
+            if (sc.hasNextInt()) {
+                int choice = sc.nextInt();
+                trackType = Enums.TrackType.fromCode(choice);
+                if (trackType == null) {
+                    System.out.println("Invalid choice. Please try again.");
+                }
+            } else {
+                String invalid = sc.next(); // consume the invalid input
+                System.out.println("Invalid input. Please enter a number.");
             }
         }
         return TrackFactory.createTrack(trackType);

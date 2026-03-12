@@ -9,7 +9,7 @@ public class Player {
         System.out.println("[Player] Player '" + name + "' created.");
     }
 
-    public static Player getInstance(String name) {
+    public static synchronized Player getInstance(String name) {
         if (instance == null) {
             instance = new Player(name);
         } else {
