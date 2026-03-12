@@ -195,4 +195,29 @@ Enums {
             return null;
         }
     }
+
+
+    public enum TuneMenu {
+        START_RACE(1, "Start Race"),
+        CHANGE_ENGINE(2, "Change Engine"),
+        CHANGE_TURBO(3, "Change Turbocharger");
+
+        private final int code;
+        private final String displayName;
+
+        TuneMenu(int code, String displayName) {
+            this.code = code;
+            this.displayName = displayName;
+        }
+
+        public int getCode() { return code; }
+        public String getDisplayName() { return displayName; }
+
+        public static TuneMenu fromCode(int code) {
+            for (TuneMenu menu : values()) {
+                if (menu.code == code) return menu;
+            }
+            return null;
+        }
+    }
 }

@@ -1,26 +1,27 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.Scanner;
 
 // TEMPLATE PATTERN — Race method defines fixed sequence of steps
 
 public abstract class Race {
 
-    // Template method
-    public final void race(Car car, Track track, NOS nosCar) {
+    // Template method - now accepts Scanner
+    public final void race(Car car, Track track, Scanner sc) {
         car.carInfo();
         track.trackInfo();
         startCar(car);
         startLine(track);
         accelerateCar(car);
 
-        // pitStop - only if NOS is provided
+        // pitStop - pass scanner for user input
+        NOS nosCar = pitStop(car, sc);
+
         if (nosCar != null) {
-            Car carWithNOS = pitStop(nosCar);
-            // g) applyNos
-            applyNos((NOS) carWithNOS);
+            applyNos(nosCar);
             finishLine(track);
-            stopCar(carWithNOS);
+            stopCar(nosCar);
         } else {
             finishLine(track);
             stopCar(car);
@@ -41,9 +42,18 @@ public abstract class Race {
         car.accelerate();
     }
 
-    protected Car pitStop(NOS nosCar) {
+    protected NOS pitStop(Car car, Scanner sc) {
         System.out.println("\n[PitStop] Entering pit stop...");
-        System.out.println("[PitStop] " + (nosCar instanceof ResonacNOS ? "Resonance" : "Sema") + " NOS kit ready!");
+
+        // Use NOSSelectionHandler with the passed scanner
+        NOS nosCar = NOSSelectionHandler.selectNOS(sc, car);
+
+        if (nosCar != null) {
+            System.out.println("[PitStop] " +
+                    (nosCar instanceof ResonacNOS ? "Resonac" : "Sema") +
+                    " NOS kit fitted!");
+        }
+
         System.out.println("[PitStop] Exiting pit stop...\n");
         return nosCar;
     }
@@ -53,8 +63,7 @@ public abstract class Race {
         nos.accelerate();
     }
 
-
-    protected abstract void finishLine(Track track); //abstract method
+    protected abstract void finishLine(Track track);
 
     protected void stopCar(Car car) {
         car.stop();
