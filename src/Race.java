@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public abstract class Race {
 
-    // Template method - now accepts Scanner
+    // Template method
     public final void race(Car car, Track track, Scanner sc) {
         car.carInfo();
         track.trackInfo();
@@ -15,7 +15,6 @@ public abstract class Race {
         startLine(track);
         accelerateCar(car);
 
-        // pitStop - pass scanner for user input
         NOS nosCar = pitStop(car, sc);
 
         if (nosCar != null) {
@@ -45,7 +44,6 @@ public abstract class Race {
     protected NOS pitStop(Car car, Scanner sc) {
         System.out.println("\n[PitStop] Entering pit stop...");
 
-        // Use NOSSelectionHandler with the passed scanner
         NOS nosCar = NOSSelectionHandler.selectNOS(sc, car);
 
         if (nosCar != null) {
